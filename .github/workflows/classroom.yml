@@ -25,9 +25,19 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 100
+    - name: Test2
+      id: test2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test2
+        setup-command: ls
+        command: ls
+        timeout: 10
+        max-score: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         TEST1_RESULTS: "${{steps.test1.outputs.result}}"
+        TEST2_RESULTS: "${{steps.test2.outputs.result}}"
       with:
-        runners: test1
+        runners: test1,test2
